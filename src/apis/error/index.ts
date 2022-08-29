@@ -75,7 +75,6 @@ class HTTPResponseError<Code extends HTTPResponseErrorCode> extends OpizeErrorBa
 const httpResponseErrorCodes: { [C in HTTPResponseErrorCode]: true } = {
     [ClientErrorCode.ResponseError]: true,
     [APIErrorCode.Unauthorized]: true,
-    [APIErrorCode.Unauthorized]: true,
     [APIErrorCode.RateLimited]: true,
     [APIErrorCode.InvalidRequestURL]: true,
     [APIErrorCode.InvalidRequest]: true,
