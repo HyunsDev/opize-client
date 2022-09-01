@@ -1,4 +1,6 @@
-export type Endpoint<T extends Record<string, any>> = {
+type value = string | number | boolean | Date;
+
+export type Endpoint<T extends Record<string, value>> = {
     method: 'get' | 'post' | 'patch' | 'delete';
     path: (e: T) => string;
     pathParams: (keyof T)[];
