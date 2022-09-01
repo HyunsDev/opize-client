@@ -22,10 +22,10 @@ yarn add opize-client
 import { Client } from 'opize-client';
 
 const client = new Client({
-    auth: '(Hyuns API Server Token)'
+    auth: '(opize API Token)'
 })
 
 ;(async () => {
-    console.log(await client.var.list())
+    console.log(await client.user.get())
 });
 ```
