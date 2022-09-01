@@ -69,6 +69,10 @@ export class Client {
         this.timeoutMs = options?.timeoutMs ?? 60_000;
     }
 
+    public updateAuth(auth?: string) {
+        this.auth = auth;
+    }
+
     private authAsHeaders(auth?: string): Record<string, string> {
         const headers: Record<string, string> = {};
         const authHeaderValue = auth ?? this.auth;
@@ -105,7 +109,7 @@ export class Client {
         /**
          * 유저 정보 조회
          */
-        get: (args: WithAuth<getUserParameters>): Promise<getUserResponse> => {
+        get: (args: WithAuth<getUserParameters> = {}): Promise<getUserResponse> => {
             return this.request<getUserResponse>({
                 path: getUser.path(args),
                 method: getUser.method,
@@ -138,7 +142,7 @@ export class Client {
                 auth: args?.auth,
             });
         },
-        list: (args: WithAuth<getProjectsParameters>): Promise<getProjectsResponse> => {
+        list: (args: WithAuth<getProjectsParameters> = {}): Promise<getProjectsResponse> => {
             return this.request<getProjectsResponse>({
                 path: getProjects.path(args),
                 method: getProjects.method,
