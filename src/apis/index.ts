@@ -36,8 +36,6 @@ import {
     UnknownHTTPResponseError,
 } from './error';
 import { pick } from './utils';
-import { version as PACKAGE_VERSION, name as PACKAGE_NAME } from '../../package.json';
-import { Endpoint } from '../types/endpoint';
 
 export interface ClientOptions {
     auth?: string;
@@ -58,7 +56,7 @@ export interface RequestParameters {
     auth?: string;
 }
 
-export default class Client {
+export class Client {
     private auth?: string;
     private prefixUrl: string;
     private userAgent: string;
@@ -67,7 +65,7 @@ export default class Client {
     public constructor(options?: ClientOptions) {
         this.auth = options?.auth;
         this.prefixUrl = options?.baseUrl ?? 'https://api.opize.me/v1';
-        this.userAgent = `opize-client/${PACKAGE_VERSION}`;
+        this.userAgent = `opize-client`;
         this.timeoutMs = options?.timeoutMs ?? 60_000;
     }
 
@@ -82,10 +80,7 @@ export default class Client {
 
     public async request<ResponseBody>({ path, method, query, body, auth }: RequestParameters): Promise<ResponseBody> {
         const url = `${this.prefixUrl}${path}`;
-        const headers: Record<string, string> = {
-            ...this.authAsHeaders(auth),
-            'user-agent': this.userAgent,
-        };
+        const headers: Record<string, string> = this.authAsHeaders(auth);
 
         try {
             const response = await RequestTimeoutError.rejectAfterTimeout(
