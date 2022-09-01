@@ -3,7 +3,7 @@ export type UserObject = {
     email: string;
     name: string;
     imageUrl: string;
-    role: string[];
+    roles: string[];
     lastLogin: Date;
     markingAccept?: Date;
     currency: 'KRW' | string;
