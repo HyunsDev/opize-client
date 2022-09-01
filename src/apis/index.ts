@@ -10,6 +10,24 @@ import {
 } from './endpoints/user';
 
 import {
+    getProject,
+    getProjectParameters,
+    getProjectResponse,
+    deleteProject,
+    deleteProjectParameters,
+    deleteProjectResponse,
+    getProjects,
+    getProjectsParameters,
+    getProjectsResponse,
+    patchProject,
+    patchProjectParameters,
+    patchProjectResponse,
+    postProject,
+    postProjectParameters,
+    postProjectResponse,
+} from './endpoints/project';
+
+import {
     APIResponseError,
     isHTTPResponseError,
     isOpizeClientError,
@@ -89,6 +107,9 @@ export default class Client {
     }
 
     public readonly user = {
+        /**
+         * 유저 정보 조회
+         */
         get: (args: WithAuth<getUserParameters>): Promise<getUserResponse> => {
             return this.request<getUserResponse>({
                 path: getUser.path(args),
@@ -98,12 +119,63 @@ export default class Client {
                 auth: args?.auth,
             });
         },
+        /**
+         * 유저 정보 수정
+         */
         patch: (args: WithAuth<patchUserParameters>): Promise<patchUserResponse> => {
             return this.request<patchUserResponse>({
                 path: patchUser.path(args),
                 method: patchUser.method,
                 query: pick(args, patchUser.queryParams),
                 body: pick(args, patchUser.bodyParams),
+                auth: args?.auth,
+            });
+        },
+    };
+
+    public readonly project = {
+        get: (args: WithAuth<getProjectParameters>): Promise<getProjectResponse> => {
+            return this.request<getProjectResponse>({
+                path: getProject.path(args),
+                method: getProject.method,
+                query: pick(args, getProject.queryParams),
+                body: pick(args, getProject.bodyParams),
+                auth: args?.auth,
+            });
+        },
+        list: (args: WithAuth<getProjectsParameters>): Promise<getProjectsResponse> => {
+            return this.request<getProjectsResponse>({
+                path: getProjects.path(args),
+                method: getProjects.method,
+                query: pick(args, getProjects.queryParams),
+                body: pick(args, getProjects.bodyParams),
+                auth: args?.auth,
+            });
+        },
+        post: (args: WithAuth<postProjectParameters>): Promise<postProjectResponse> => {
+            return this.request<postProjectResponse>({
+                path: postProject.path(args),
+                method: postProject.method,
+                query: pick(args, postProject.queryParams),
+                body: pick(args, postProject.bodyParams),
+                auth: args?.auth,
+            });
+        },
+        patch: (args: WithAuth<patchProjectParameters>): Promise<patchProjectResponse> => {
+            return this.request<patchProjectResponse>({
+                path: patchProject.path(args),
+                method: patchProject.method,
+                query: pick(args, patchProject.queryParams),
+                body: pick(args, patchProject.bodyParams),
+                auth: args?.auth,
+            });
+        },
+        delete: (args: WithAuth<deleteProjectParameters>): Promise<deleteProjectResponse> => {
+            return this.request<deleteProjectResponse>({
+                path: deleteProject.path(args),
+                method: deleteProject.method,
+                query: pick(args, deleteProject.queryParams),
+                body: pick(args, deleteProject.bodyParams),
                 auth: args?.auth,
             });
         },

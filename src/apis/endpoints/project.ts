@@ -75,3 +75,4 @@ export const deleteProject: Endpoint<deleteProjectParameters> = {
     pathParams: ['projectCode'],
     queryParams: [],
 };
+export type deleteProjectResponse = Record<string, never>;
