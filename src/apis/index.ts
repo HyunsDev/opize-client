@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import {
     getUser,
@@ -29,6 +29,7 @@ import {
 
 import {
     APIResponseError,
+    buildRequestError,
     isHTTPResponseError,
     isOpizeClientError,
     OpizeClientError,
@@ -36,6 +37,8 @@ import {
     UnknownHTTPResponseError,
 } from './error';
 import { pick } from './utils';
+
+export { APIResponseError, isHTTPResponseError, isOpizeClientError, RequestTimeoutError, UnknownHTTPResponseError };
 
 export interface ClientOptions {
     auth?: string;
@@ -99,8 +102,11 @@ export class Client {
 
             return response.data;
         } catch (error: unknown) {
+            if (error instanceof AxiosError && error.response) {
+                throw buildRequestError(error.response);
+            }
             if (!isOpizeClientError(error)) throw error;
-            if (!isHTTPResponseError(error)) throw error;
+            if (isHTTPResponseError(error)) throw error;
             throw error;
         }
     }

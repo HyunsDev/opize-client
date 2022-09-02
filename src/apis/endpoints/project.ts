@@ -30,8 +30,10 @@ export type getProjectResponse = ProjectObject;
 // POST /project
 export type postProjectParameters = {
     code: string;
+    name: string;
     url: string;
     iconUrl: string;
+    bannerUrl: string;
     ruleUrl: string;
     status: string;
     userId: number;
@@ -40,7 +42,7 @@ export type postProjectParameters = {
 export const postProject: Endpoint<postProjectParameters> = {
     path: () => `/project`,
     method: 'post',
-    bodyParams: ['code', 'desc', 'iconUrl', 'ruleUrl', 'status', 'url', 'userId'],
+    bodyParams: ['code', 'bannerUrl', 'name', 'desc', 'iconUrl', 'ruleUrl', 'status', 'url', 'userId'],
     pathParams: [],
     queryParams: [],
 };
@@ -51,6 +53,7 @@ export type patchProjectParameters = {
     projectCode: string;
     url?: string;
     iconUrl?: string;
+    bannerUrl?: string;
     ruleUrl?: string;
     desc?: string;
     status?: string;
