@@ -114,7 +114,7 @@ export class Client {
         /**
          * 유저 정보 조회
          */
-        get: (args: WithAuth<getUserParameters> = {}): Promise<getUserResponse> => {
+        get: (args: WithAuth<getUserParameters>): Promise<getUserResponse> => {
             return this.request<getUserResponse>({
                 path: getUser.path(args),
                 method: getUser.method,
