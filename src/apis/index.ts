@@ -32,7 +32,6 @@ import {
     buildRequestError,
     isHTTPResponseError,
     isOpizeClientError,
-    OpizeClientError,
     RequestTimeoutError,
     UnknownHTTPResponseError,
 } from './error';

@@ -57,11 +57,12 @@ export type patchProjectParameters = {
     ruleUrl?: string;
     desc?: string;
     status?: string;
+    name?: string;
 };
 export const patchProject: Endpoint<patchProjectParameters> = {
     path: (e) => `/project/${e.projectCode}`,
     method: 'patch',
-    bodyParams: ['desc', 'iconUrl', 'ruleUrl', 'status', 'url'],
+    bodyParams: ['name', 'bannerUrl', 'desc', 'iconUrl', 'ruleUrl', 'status', 'url'],
     pathParams: ['projectCode'],
     queryParams: [],
 };
