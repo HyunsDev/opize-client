@@ -47,7 +47,7 @@ export interface ClientOptions {
 }
 
 type Method = 'get' | 'post' | 'patch' | 'delete';
-type QueryParams = Record<string, string | number | boolean | Date> | URLSearchParams;
+type QueryParams = Record<string, any> | URLSearchParams;
 type WithAuth<T> = T & { auth?: string };
 
 export interface RequestParameters {
