@@ -1,4 +1,4 @@
-type value = string | number | boolean | Date;
+type value = any;
 
 export type Endpoint<T extends Record<string, value>> = {
     method: 'get' | 'post' | 'patch' | 'delete';

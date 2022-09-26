@@ -59,11 +59,13 @@ export type patchProjectParameters = {
     desc?: string;
     status?: string;
     name?: string;
+    isOAuthAble?: boolean;
+    redirectUrls?: string[];
 };
 export const patchProject: Endpoint<patchProjectParameters> = {
     path: (e) => `/project/${e.projectCode}`,
     method: 'patch',
-    bodyParams: ['name', 'bannerUrl', 'desc', 'iconUrl', 'ruleUrl', 'status', 'url'],
+    bodyParams: ['name', 'bannerUrl', 'desc', 'iconUrl', 'ruleUrl', 'status', 'url', 'isOAuthAble', 'redirectUrls'],
     pathParams: ['projectCode'],
     queryParams: [],
 };

@@ -9,4 +9,5 @@ export type ProjectObject = {
     ruleUrl: string;
     status: 'SHOW' | 'HIDDEN';
     redirectUrl?: string[];
+    isOAuthAble: boolean;
 };
