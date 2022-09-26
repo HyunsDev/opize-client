@@ -8,4 +8,5 @@ export type ProjectObject = {
     desc: string;
     ruleUrl: string;
     status: 'SHOW' | 'HIDDEN';
+    redirectUrl?: string[];
 };

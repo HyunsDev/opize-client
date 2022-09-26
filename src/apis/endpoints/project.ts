@@ -17,13 +17,14 @@ export type getProjectsResponse = {
 // GET /project/:projectCode
 export type getProjectParameters = {
     projectCode: string;
+    admin?: boolean;
 };
 export const getProject: Endpoint<getProjectParameters> = {
     path: (e) => `/project/${e.projectCode}`,
     method: 'get',
     bodyParams: [],
     pathParams: [],
-    queryParams: [],
+    queryParams: ['admin'],
 };
 export type getProjectResponse = ProjectObject;
 
