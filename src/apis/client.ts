@@ -36,6 +36,7 @@ import {
     UnknownHTTPResponseError,
 } from './error';
 import { pick } from './utils';
+import { postProjectOAuth, postProjectOAuthParameters, postProjectOAuthResponse } from './endpoints/project/oauth';
 
 export { APIResponseError, isHTTPResponseError, isOpizeClientError, RequestTimeoutError, UnknownHTTPResponseError };
 
@@ -182,6 +183,17 @@ export class Client {
                 body: pick(args, deleteProject.bodyParams),
                 auth: args?.auth,
             });
+        },
+        oauth: {
+            post: (args: WithAuth<postProjectOAuthParameters>): Promise<postProjectOAuthResponse> => {
+                return this.request<postProjectOAuthResponse>({
+                    path: postProjectOAuth.path(args),
+                    method: postProjectOAuth.method,
+                    query: pick(args, postProjectOAuth.queryParams),
+                    body: pick(args, postProjectOAuth.bodyParams),
+                    auth: args?.auth,
+                });
+            },
         },
     };
 }
