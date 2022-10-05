@@ -37,6 +37,28 @@ import {
 } from './error';
 import { pick } from './utils';
 import { postProjectOAuth, postProjectOAuthParameters, postProjectOAuthResponse } from './endpoints/project/oauth';
+import {
+    postOAuth,
+    postOAuthParameters,
+    postOAuthResponse,
+    postOAuthVerify,
+    postOAuthVerifyParameters,
+    postOAuthVerifyResponse,
+} from './endpoints/oauth';
+import {
+    getDashboardNotionPages,
+    getDashboardNotionPagesParameters,
+    getDashboardNotionPagesResponse,
+    getDashboardNotionPage,
+    getDashboardNotionPageParameters,
+    getDashboardNotionPageResponse,
+    patchDashboardNotionPage,
+    patchDashboardNotionPageParameters,
+    patchDashboardNotionPageResponse,
+    deleteDashboardNotionPage,
+    deleteDashboardNotionPageParameters,
+    deleteDashboardNotionPageResponse,
+} from './endpoints/dashboard/notion/page';
 
 export { APIResponseError, isHTTPResponseError, isOpizeClientError, RequestTimeoutError, UnknownHTTPResponseError };
 
@@ -193,6 +215,74 @@ export class Client {
                     body: pick(args, postProjectOAuth.bodyParams),
                     auth: args?.auth,
                 });
+            },
+        },
+    };
+
+    public readonly oAuth = {
+        post: (args: WithAuth<postOAuthParameters>): Promise<postOAuthResponse> => {
+            return this.request<postOAuthResponse>({
+                path: postOAuth.path(args),
+                method: postOAuth.method,
+                query: pick(args, postOAuth.queryParams),
+                body: pick(args, postOAuth.bodyParams),
+                auth: args?.auth,
+            });
+        },
+        verify: (args: WithAuth<postOAuthVerifyParameters>): Promise<postOAuthVerifyResponse> => {
+            return this.request<postOAuthVerifyResponse>({
+                path: postOAuthVerify.path(args),
+                method: postOAuthVerify.method,
+                query: pick(args, postOAuthVerify.queryParams),
+                body: pick(args, postOAuthVerify.bodyParams),
+                auth: args?.auth,
+            });
+        },
+    };
+
+    public readonly dashboard = {
+        notion: {
+            page: {
+                list: (args: WithAuth<getDashboardNotionPagesParameters>): Promise<getDashboardNotionPagesResponse> => {
+                    return this.request<getDashboardNotionPagesResponse>({
+                        path: getDashboardNotionPages.path(args),
+                        method: getDashboardNotionPages.method,
+                        query: pick(args, getDashboardNotionPages.queryParams),
+                        body: pick(args, getDashboardNotionPages.bodyParams),
+                        auth: args?.auth,
+                    });
+                },
+                get: (args: WithAuth<getDashboardNotionPageParameters>): Promise<getDashboardNotionPageResponse> => {
+                    return this.request<getDashboardNotionPageResponse>({
+                        path: getDashboardNotionPage.path(args),
+                        method: getDashboardNotionPage.method,
+                        query: pick(args, getDashboardNotionPage.queryParams),
+                        body: pick(args, getDashboardNotionPage.bodyParams),
+                        auth: args?.auth,
+                    });
+                },
+                patch: (
+                    args: WithAuth<patchDashboardNotionPageParameters>
+                ): Promise<patchDashboardNotionPageResponse> => {
+                    return this.request<patchDashboardNotionPageResponse>({
+                        path: patchDashboardNotionPage.path(args),
+                        method: patchDashboardNotionPage.method,
+                        query: pick(args, patchDashboardNotionPage.queryParams),
+                        body: pick(args, patchDashboardNotionPage.bodyParams),
+                        auth: args?.auth,
+                    });
+                },
+                delete: (
+                    args: WithAuth<deleteDashboardNotionPageParameters>
+                ): Promise<deleteDashboardNotionPageResponse> => {
+                    return this.request<deleteDashboardNotionPageResponse>({
+                        path: deleteDashboardNotionPage.path(args),
+                        method: deleteDashboardNotionPage.method,
+                        query: pick(args, deleteDashboardNotionPage.queryParams),
+                        body: pick(args, deleteDashboardNotionPage.bodyParams),
+                        auth: args?.auth,
+                    });
+                },
             },
         },
     };
