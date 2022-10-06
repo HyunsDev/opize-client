@@ -17,14 +17,15 @@ export type getUserResponse = UserObject;
 // PATCH /user
 export type patchUserParameters = {
     userId?: number | 'me';
+    currency?: 'KRW';
     imageUrl?: string;
     name?: string;
     marketingAccept?: Date;
 };
 export const patchUser: Endpoint<patchUserParameters> = {
     method: 'patch',
-    path: (data) => `user/${data.userId}`,
-    bodyParams: ['imageUrl', 'marketingAccept', 'name'],
+    path: (data) => `/user/${data.userId}`,
+    bodyParams: ['imageUrl', 'marketingAccept', 'name', 'currency'],
     pathParams: ['userId'],
     queryParams: [],
 };
