@@ -5,7 +5,7 @@ export type UserObject = {
     imageUrl: string;
     roles: string[];
     lastLogin: Date;
-    markingAccept?: Date;
+    marketingAccept?: Date;
     currency: 'KRW' | string;
     status: string;
 };
