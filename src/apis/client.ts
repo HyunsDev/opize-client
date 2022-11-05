@@ -2,6 +2,9 @@ import axios, { AxiosError } from 'axios';
 
 import {
     getUser,
+    getUserOAuthResponse,
+    getUserOAuths,
+    getUserOAuthsParameters,
     getUserParameters,
     getUserResponse,
     patchUser,
@@ -157,6 +160,17 @@ export class Client {
                 body: pick(args, patchUser.bodyParams),
                 auth: args?.auth,
             });
+        },
+        oauth: {
+            list: (args: WithAuth<getUserOAuthsParameters>): Promise<getUserOAuthResponse> => {
+                return this.request<getUserOAuthResponse>({
+                    path: getUserOAuths.path(args),
+                    method: getUserOAuths.method,
+                    query: pick(args, getUserOAuths.queryParams),
+                    body: pick(args, getUserOAuths.bodyParams),
+                    auth: args?.auth,
+                });
+            },
         },
     };
 
