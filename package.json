@@ -14,9 +14,16 @@
   "author": "Opize <opize@opize.me>",
   "license": "MIT",
   "scripts": {
-    "publish:npm": "rmdir dist /s /q && mkdir dist && babel src -d dist --copy-files --extensions \".ts\" --no-copy-ignored && tsc --p tsconfig.module.json",
+    "build": "rmdir dist /s /q && mkdir dist && babel src -d dist --copy-files --extensions \".ts\" --no-copy-ignored && tsc --p tsconfig.module.json",
+    "build:mac": "rm -r dist && mkdir dist && babel src -d dist --copy-files --extensions \".ts,.tsx\" --no-copy-ignored && tsc -p tsconfig.module.json",
     "lint": "eslint \"src/**/*.{ts,js}\"",
     "lint:fix": "eslint --fix \"src/**/*.{ts,js}\""
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-typescript",
+      "@babel/preset-env"
+    ]
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -26,6 +33,7 @@
   "devDependencies": {
     "@babel/cli": "^7.18.10",
     "@babel/preset-typescript": "^7.18.6",
+    "@babel/preset-env": "^7.20.2",
     "@types/jest": "^28.1.8",
     "@typescript-eslint/eslint-plugin": "^5.35.1",
     "@typescript-eslint/parser": "^5.35.1",
